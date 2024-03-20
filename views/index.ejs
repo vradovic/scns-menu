@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>NS Menza Jelovnik</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <header class="container">
+      <h1>NS Menza Jelovnik</h1>
+      <h2><%= date.toLocaleDateString('sr-Latn-RS', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) %></h2>
+      <div role="group">
+        <a role="button" href=<%= `/?date=${previousDate.toISOString().slice(0, 10)}` %>>Prethodni</a>
+        <input type="date" id="dateInput" name="date" value=<%= date.toISOString().slice(0, 10) %>>
+        <a role="button" href=<%= `/?date=${nextDate.toISOString().slice(0, 10)}` %>>Sledeći</a>
+      </div>
+    </header>
+    <main class="container">
+      <h3>Doručak</h3>
+      <h3>Ručak</h3>
+      <h3>Večera</h3>
+    </main>
+    <script>
+      document.getElementById('dateInput').addEventListener('change', (e) => {
+        window.location.assign(`/?date=${e.target.value}`);
+      });
+    </script>
   </body>
 </html>
