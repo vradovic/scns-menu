@@ -28,11 +28,9 @@
         <% } %>
 
         <% if (menu && menu[meal]?.length > 0) { %>
-          <ul>
             <% menu[meal].forEach(food => { %>
-              <li><%= food %></li>
+              <p><%= food %></p>
             <% }) %>
-          </ul>
         <% } else { %>
           <p>Nema podataka.</p>
         <% } %>
