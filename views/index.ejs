@@ -18,9 +18,25 @@
       </div>
     </header>
     <main class="container">
-      <h3>Doručak</h3>
-      <h3>Ručak</h3>
-      <h3>Večera</h3>
+      <% ['breakfast', 'lunch', 'dinner'].forEach(meal => { %>
+        <% if (meal === 'breakfast') { %>
+          <h3>Doručak</h3>
+        <% } else if (meal === 'lunch') { %>
+          <h3>Ručak</h3>
+        <% } else { %>
+          <h3>Večera</h3>
+        <% } %>
+
+        <% if (menu && menu[meal]?.length > 0) { %>
+          <ul>
+            <% menu[meal].forEach(food => { %>
+              <li><%= food %></li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p>Nema podataka.</p>
+        <% } %>
+      <% }) %>
     </main>
     <script>
       document.getElementById('dateInput').addEventListener('change', (e) => {

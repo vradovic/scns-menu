@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
+const getMenu = require('../pipeline/db');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   const date = req.query.date ? new Date(req.query.date) : new Date();
 
   if (isNaN(date)) {
@@ -13,7 +14,9 @@ router.get('/', function(req, res, next) {
     previousDate.setDate(previousDate.getDate() - 1);
     const nextDate = new Date(date);
     nextDate.setDate(nextDate.getDate() + 1)
-    res.render('index', { date, previousDate, nextDate });
+
+    const menu = await getMenu(date);
+    res.render('index', { date, previousDate, nextDate, menu });
   }
 });
 
