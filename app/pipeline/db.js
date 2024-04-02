@@ -10,7 +10,7 @@ const getMenu = async (date) => {
 }
 
 const uploadMenus = async (newMenus) => {
-  menus.insertMany(newMenus);
+  await menus.insertMany(newMenus);
 }
 
 module.exports = { getMenu, uploadMenus };

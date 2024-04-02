@@ -4,6 +4,7 @@ const { uploadMenus } = require('./db');
 
 crawler(process.env.PDF_URL).then(async (pdf) => {
   console.log('PDF loaded...');
+  console.log(pdf)
   const tokens = pdf.text.split('\n');
 
   const menus = [];
