@@ -12,9 +12,9 @@ if __name__ == '__main__':
   MONGO_URL = sys.argv[2]
 
   # Download PDF
-  # response = requests.get(PDF_URL)
-  # with open('jelovnik.pdf', 'wb') as f:
-  #   f.write(response.content)
+  response = requests.get(PDF_URL)
+  with open('jelovnik.pdf', 'wb') as f:
+    f.write(response.content)
 
 
   # Parse PDF
