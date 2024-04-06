@@ -19,7 +19,6 @@ router.get("/", async function (req, res, next) {
 
     const menu = await getMenu(date);
     res.render("index", { date, previousDate, nextDate, menu });
-    
   }
 });
 

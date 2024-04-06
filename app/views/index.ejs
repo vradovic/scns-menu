@@ -1,42 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="sr">
   <head>
-    <title>NS Menza Jelovnik</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    />
+    <title>SCNS Jelovnik</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Jelovnik za studentski restoran u Novom Sadu." />
+    <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
-    <header class="container">
-      <h1>NS Menza Jelovnik</h1>
-      <h2><%= date.toLocaleDateString('sr-Latn-RS', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) %></h2>
-      <div role="group">
-        <a role="button" href=<%= `/?date=${previousDate.toISOString().slice(0, 10)}` %>>Prethodni</a>
-        <input type="date" id="dateInput" name="date" value=<%= date.toISOString().slice(0, 10) %>>
-        <a role="button" href=<%= `/?date=${nextDate.toISOString().slice(0, 10)}` %>>Sledeći</a>
-      </div>
-    </header>
-    <main class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-      <% ['breakfast', 'lunch', 'dinner'].forEach(meal => { %>
-        <div>
-          <% if (meal === 'breakfast') { %>
-            <h3>Doručak</h3>
-          <% } else if (meal === 'lunch') { %>
-            <h3>Ručak</h3>
-          <% } else { %>
-            <h3>Večera</h3>
-          <% } %>
-  
-          <% if (menu && menu[meal]?.length > 0) { %>
-              <p style="white-space: pre-wrap;"><%- menu[meal] %></p>
-          <% } else { %>
-            <p>Nema podataka.</p>
-          <% } %>
+    <div class="wrapper">
+      <header>
+        <h1>SCNS Jelovnik</h1>
+        <h2><%= date.toLocaleDateString('sr-Latn-RS', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) %></h2>
+        <div role="group">
+          <a href=<%= `/?date=${previousDate.toISOString().slice(0, 10)}` %>>Prethodni</a>
+          <input type="date" id="dateInput" name="date" value=<%= date.toISOString().slice(0, 10) %>>
+          <a href=<%= `/?date=${nextDate.toISOString().slice(0, 10)}` %>>Sledeći</a>
         </div>
-      <% }) %>
-    </main>
+      </header>
+      <main>
+        <% ['breakfast', 'lunch', 'dinner'].forEach(meal => { %>
+          <div>
+            <h3>
+              <% if (meal === 'breakfast') { %>
+                Doručak
+              <% } else if (meal === 'lunch') { %>
+                Ručak
+              <% } else { %>
+                Večera
+              <% } %>
+            </h3>
+    
+            <% if (menu && menu[meal]?.length > 0) { %>
+                <p style="white-space: pre-wrap;"><%- menu[meal] %></p>
+            <% } else { %>
+              <p>Nema podataka.</p>
+            <% } %>
+          </div>
+        <% }) %>
+      </main>
+    </div>
     <script>
       document.getElementById('dateInput').addEventListener('change', (e) => {
         window.location.assign(`/?date=${e.target.value}`);
